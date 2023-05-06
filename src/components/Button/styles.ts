@@ -30,7 +30,15 @@ const getBackgroundColor = (
     `
 }
 
-const getShadowColor = (buttonType: 'primary' | 'secondary') => {
+const getShadowColor = (
+  buttonType: 'primary' | 'secondary',
+  disabled: boolean
+) => {
+  if (disabled) {
+    return css`
+      ${({ theme }) => theme.palette.grayDark}
+    `
+  }
   if (buttonType === 'primary') {
     return css`
       ${({ theme }) => theme.palette.primaryDark}
@@ -56,7 +64,8 @@ export const ButtonMainContainer = styled.button<{
   border-radius: 10px;
   text-transform: uppercase;
   transition: all 0.1s;
-  box-shadow: 0 6px 0 ${({ buttonType }) => getShadowColor(buttonType)};
+  box-shadow: 0 6px 0
+    ${({ buttonType, disabled }) => getShadowColor(buttonType, !!disabled)};
   margin-bottom: 8px;
   display: inline-block;
   color: ${({ buttonType }) => getFontColor(buttonType)};

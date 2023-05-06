@@ -1,16 +1,16 @@
-"use client";
+'use client'
 
-import "./globals.css";
-import { Provider as StoreProvider } from "react-redux";
+import './globals.css'
+import { Provider as StoreProvider } from 'react-redux'
 
-import { store } from "@/store";
-import { ThemeProvider } from "styled-components";
-import { defaultTheme } from "@/theme";
+import { store } from '@/store'
+import { ThemeProvider } from 'styled-components'
+import { defaultTheme } from '@/theme'
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -20,5 +20,5 @@ export default function RootLayout({
         </html>
       </StoreProvider>
     </ThemeProvider>
-  );
+  )
 }

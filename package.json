@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-brands-svg-icons": "^6.3.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "18.16.3",
     "@types/react": "18.2.2",
     "@types/react-dom": "18.2.3",
+    "animate.css": "^4.1.1",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.4",
+    "firebase": "^9.21.0",
     "next": "13.3.4",
     "prettier": "^2.8.8",
     "react": "18.2.0",
@@ -22,11 +27,14 @@
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
+    "socket.io-client": "^4.6.1",
     "styled-components": "^5.3.10",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
+    "@types/uuid": "^9.0.1",
     "babel-plugin-styled-components": "^2.1.1"
   }
 }

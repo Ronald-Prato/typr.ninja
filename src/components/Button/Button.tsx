@@ -1,3 +1,5 @@
+'use client'
+
 import { FC } from 'react'
 import { ButtonMainContainer } from './styles'
 import { ButtonProps } from './contracts'

@@ -1,0 +1,86 @@
+.queueLoadingMainContainer {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--dark);
+}
+
+.queueMainContainer {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Righteous', cursive;
+}
+
+.queueMainContainer img {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.queueMainContainer h2 {
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.barContainer {
+  width: 350px;
+  margin-bottom: 30px;
+}
+
+.levelBar {
+  background-color: var(--gray);
+  height: 40px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.2);
+  
+}
+
+.levelBarCompleted {
+  background-image: linear-gradient(to right,
+      var(--secondary),
+      var(--primary));
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px 0px 0 10px;
+}
+
+.levelXp {
+  position: absolute;
+  top: 10px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  color: var(--gray);
+  color: white;
+}
+
+.levelCurrent {
+  color: whitesmoke;
+  margin-bottom: 10px;
+  font-size: xx-large;
+  font-weight: bolder;
+  text-shadow: 20px;
+  position: absolute;
+  z-index: 100;
+  background-color: var(--dark);
+  border: 2px solid var(--primary);
+  left: -20px;
+  top: -10px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: -3.5px 6px 0 rgba(0, 0, 0, 0.2);
+}

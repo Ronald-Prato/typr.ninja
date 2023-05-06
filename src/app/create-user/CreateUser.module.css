@@ -1,0 +1,135 @@
+.selectUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--dark);
+}
+
+.selectUserContainer {
+  max-height: 400px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 450px;
+  width: 100%;
+  margin-inline: auto;
+  background-color: var(--darkLight);
+  border-radius: 25px;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.btn__area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  max-width: 450px;
+  width: 100%;
+  --animate-delay: 0.5s;
+}
+
+.btn-join {
+  width: 100%;
+}
+
+.selectUser__icons {
+  text-align: center;
+  margin-bottom: 20px;
+  transform: scale(0.9);
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.avatarContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.avatar-text {
+  margin-top: 5px;
+  font-size: 14px;
+  color: var(--color-gray);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  text-transform: none;
+  width: 100%;
+  padding: 0 2rem;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.formInput {
+  background-color: var(--dark);
+  color: var(--gray);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 1rem 1rem;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 20px;
+  outline: none;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Righteous', cursive;
+}
+
+.btnAvtArea {
+  transform: scale(0.8);
+}
+
+.startBtnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.start-btn {
+  width: fit-content;
+  margin-top: 20px;
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-110%);
+  }
+}
+.slide-out {
+  animation: slideOut 250ms ease forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(-110%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.slide-in {
+  animation: slideIn 250ms ease forwards;
+}
