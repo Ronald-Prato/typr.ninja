@@ -1,6 +1,14 @@
+'use client'
+import { useEffect } from 'react'
 import '../firebase.init'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
-  if (typeof window === 'undefined') return null
-  window.location.href = '/queue'
+  const router = useRouter()
+
+  useEffect(() => {
+    router.replace('/queue')
+  }, [])
+
+  return <></>
 }
