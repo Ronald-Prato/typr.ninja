@@ -9,13 +9,16 @@ import {
 } from 'firebase/auth'
 import { useState } from 'react'
 import { useAppDispatch } from '@/store'
+import { useLocalStorage } from './useLocalStorage'
 import { setUserData } from '@/store/user/user.dispatchers'
+import { cookies } from 'next/headers'
 // import { fetchUserCreation } from '../services/signup'
 
 export const useAuth = () => {
-  const auth = getAuth(firebaseApp)
   const router = useRouter()
+  const auth = getAuth(firebaseApp)
   const dispatch = useAppDispatch()
+  const { removeFromLocalStorage } = useLocalStorage()
   // const { handleSetUserData } = useContext(UserContext);
 
   const [isLoading, setIsLoading] = useState(false)
@@ -63,6 +66,8 @@ export const useAuth = () => {
 
   const logout = () => {
     auth.signOut()
+    removeFromLocalStorage('userData')
+    document.cookie = `uid=null; path=/;`
     router.replace('/login')
   }
 

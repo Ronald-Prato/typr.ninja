@@ -84,3 +84,11 @@
   justify-content: center;
   box-shadow: -3.5px 6px 0 rgba(0, 0, 0, 0.2);
 }
+
+.signOut {
+  width: fit-content;
+  margin: 0 auto;
+  position: fixed;
+  bottom: 5%;
+  transform: scale(0.8);
+}

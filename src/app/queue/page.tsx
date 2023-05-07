@@ -8,8 +8,10 @@ import styles from './Queue.module.css'
 import { Button } from '@/components'
 import SocketContext from '@/sockets.context'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { useAuth } from '@/hooks/useAuth'
 
 export default function QueuePage(props: { params: { userData: UserData } }) {
+  const { logout } = useAuth()
   const { putPlayerInQueue, removePlayerFromQueue } = useContext(SocketContext)
   const [inQueue, setInQueue] = useState(false)
   const { saveInLocalStorage } = useLocalStorage()
@@ -63,6 +65,12 @@ export default function QueuePage(props: { params: { userData: UserData } }) {
         >
           {inQueue ? 'Leave Queue' : 'Find Match'}
         </Button>
+
+        <div className={styles.signOut}>
+          <Button type="primary" onClick={logout}>
+            Sign Out
+          </Button>
+        </div>
       </div>
     )
   )

@@ -14,5 +14,10 @@ export function useLocalStorage() {
     return null
   }
 
-  return { saveInLocalStorage, getFromLocalStorage }
+  function removeFromLocalStorage(key: string) {
+    if (typeof window === 'undefined') return null
+    localStorage.removeItem(key)
+  }
+
+  return { saveInLocalStorage, getFromLocalStorage, removeFromLocalStorage }
 }
