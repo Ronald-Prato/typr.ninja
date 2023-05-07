@@ -30,6 +30,8 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     chars: [],
     sentence: '',
     singleWords: [],
+    startIntervalCeil: -1,
+    startIntervalFloor: -1,
   })
 
   const setSocketId = (socketId: string) => {
