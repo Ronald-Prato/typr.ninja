@@ -2,12 +2,18 @@
 
 import { UserData } from '@/types/user'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import styles from './Queue.module.css'
 import { Button } from '@/components'
+import SocketContext from '@/sockets.context'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
 
 export default function QueuePage(props: { params: { userData: UserData } }) {
+  const { putPlayerInQueue, removePlayerFromQueue } = useContext(SocketContext)
+  const [inQueue, setInQueue] = useState(false)
+  const { saveInLocalStorage } = useLocalStorage()
+
   const [showComponent, setShowComponent] = useState(false)
   const router = useRouter()
 
@@ -15,8 +21,20 @@ export default function QueuePage(props: { params: { userData: UserData } }) {
 
   useEffect(() => {
     if (!user) router.replace('/login')
+
     setShowComponent(true)
+    saveInLocalStorage<UserData>('userData', user)
   }, [user])
+
+  const getInQueue = () => {
+    putPlayerInQueue()
+    setInQueue(true)
+  }
+
+  const getOffQueue = () => {
+    removePlayerFromQueue()
+    setInQueue(false)
+  }
 
   return (
     showComponent && (
@@ -39,8 +57,11 @@ export default function QueuePage(props: { params: { userData: UserData } }) {
           </div>
         </section>
 
-        <Button type="primary" onClick={() => {}}>
-          Find match
+        <Button
+          type={inQueue ? 'secondary' : 'primary'}
+          onClick={() => (inQueue ? getOffQueue() : getInQueue())}
+        >
+          {inQueue ? 'Leave Queue' : 'Find Match'}
         </Button>
       </div>
     )

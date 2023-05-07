@@ -11,8 +11,10 @@ export default async function QueueLayout(props: {
   if (uid) {
     const response = await fetch(`${CLIENT_API_URL}/api/get-user?uid=${uid}`, {
       cache: 'no-store',
+      next: {
+        revalidate: 1,
+      },
     })
-
     const userData = await response.json()
 
     props.params.userData = userData.data

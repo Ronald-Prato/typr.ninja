@@ -1,8 +1,6 @@
-export default function MatchIdLayout({
-  children,
-}: {
+export default async function MatchIdLayout(props: {
   children: React.ReactNode
   params: { id: string }
 }) {
-  return <div>{children}</div>
+  return props.children
 }

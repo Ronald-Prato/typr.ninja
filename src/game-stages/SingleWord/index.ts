@@ -1,1 +1,1 @@
-export * from './SingleWord'
+export * from './SingleStage'

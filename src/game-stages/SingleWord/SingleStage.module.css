@@ -1,0 +1,96 @@
+.mainInput {
+  position: fixed;
+  top: -100%;left: -100%;
+}
+
+
+.mainContainer {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: var(--dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wordsCounter {
+  margin-top: 10px;
+  color: var(--gray);
+  font-weight: 100;
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.defaultLetter, .correctLetter, .wrongLetter {
+  font-family: 'Righteous', cursive;
+  letter-spacing: 1px;
+  font-size: 40px;
+  transition: ease 200ms;
+  letter-spacing: 5px;
+}
+
+
+
+.defaultLetter {
+  color: var(--white);
+}
+
+.correctLetter {
+  color: var(--secondary);
+}
+
+.wrongLetter {
+  color: var(--danger);
+}
+
+.wordMap {
+  display: flex;
+  width: fit-content;
+  padding: 0 20px;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+}
+
+.slideUpAnimation {
+  animation: slideUp 300ms ease;
+}
+
+.gameplayMessage {
+  width: 100%;
+  position: fixed;
+  bottom: 10%;
+  text-align: center;
+  margin:auto;
+  color: var(--primary);
+  font-weight: 100;
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.nextRoundContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.nextRoundContainer h2 {
+  margin: 0;
+  padding: 0;
+  color: var(--white);
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 100;
+  font-size: 40px;
+}

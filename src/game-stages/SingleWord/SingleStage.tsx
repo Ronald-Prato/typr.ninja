@@ -1,35 +1,59 @@
 'use client'
 
+import 'animate.css'
 import { FC, useEffect, useRef, useState } from 'react'
 
-import styles from './SingleWord.module.css'
+import styles from './SingleStage.module.css'
 import { SingleWordGameStageProps } from './contracts'
 
-export const SingleWordStage: FC<SingleWordGameStageProps> = () => {
+export const SingleWordStage: FC<SingleWordGameStageProps> = ({
+  words,
+  chars,
+  onFinish,
+}) => {
   const [index, setIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
-
-  const words = ['This', 'is', 'a', 'test', 'word', 'list']
   const [currentWord, setCurrentWord] = useState('')
-  const [hastyped, setHasTyped] = useState(false)
+  const [goToNextRound, setGoToNextRound] = useState(false)
+  const [currentContent, setCurrentContent] = useState(words)
 
   useEffect(() => {
     inputRef.current?.focus()
 
     document.addEventListener('keydown', handleKeyPress)
 
+    if (goToNextRound) {
+      setTimeout(() => {
+        index === currentContent.length - 1 &&
+          currentContent === chars &&
+          onFinish()
+
+        setGoToNextRound(false)
+      }, 1500)
+    }
+
     return () => {
       document.removeEventListener('keydown', handleKeyPress)
     }
-  }, [currentWord])
+  }, [currentWord, goToNextRound])
 
   const handleKeyPress = (e: KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      if (currentWord === words[index]) {
-        setIndex((prev) => (prev < words.length - 1 ? prev + 1 : 0))
-        setCurrentWord('')
-      }
+    if (e.key !== 'Enter') return
+    if (currentWord !== currentContent[index]) return
+
+    if (index === currentContent.length - 1) {
+      setGoToNextRound(true)
+      setCurrentContent(chars)
     }
+
+    setIndex((prev) =>
+      prev < currentContent.length - 1
+        ? prev + 1
+        : currentContent !== chars
+        ? 0
+        : prev && prev
+    )
+    setCurrentWord('')
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,12 +72,23 @@ export const SingleWordStage: FC<SingleWordGameStageProps> = () => {
     return styles.wrongLetter
   }
 
+  if (goToNextRound) {
+    return (
+      <section
+        className={`${styles.nextRoundContainer} animate__animated animate__fadeInUp animate__fast`}
+      >
+        <h2>Next Round</h2>
+      </section>
+    )
+  }
+
   return (
     <label className={styles.label} htmlFor="main-input-trigger">
       <main className={styles.mainContainer}>
         <ul className={styles.wordMap}>
-          {words[index].split('').map((letter, i) => (
+          {currentContent[index].split('').map((letter, i) => (
             <span
+              key={i}
               className={`${getLetterClass(letter, i)} ${
                 styles.slideUpAnimation
               }`}
@@ -64,11 +99,11 @@ export const SingleWordStage: FC<SingleWordGameStageProps> = () => {
         </ul>
 
         <p className={styles.wordsCounter}>
-          {index + 1} / {words.length}
+          {index + 1} / {currentContent.length}
         </p>
 
         <input
-          maxLength={words[index].length}
+          maxLength={currentContent[index].length}
           className={styles.mainInput}
           onChange={handleInputChange}
           value={currentWord}
@@ -78,11 +113,9 @@ export const SingleWordStage: FC<SingleWordGameStageProps> = () => {
           ref={inputRef}
         />
 
-        {!hastyped && (
-          <p className={styles.gameplayMessage}>
-            Type the words in your screen and press <b>Enter</b>
-          </p>
-        )}
+        <p className={styles.gameplayMessage}>
+          Type the words in your screen and press <b>Enter</b>
+        </p>
       </main>
     </label>
   )
