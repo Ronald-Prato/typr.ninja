@@ -21,7 +21,6 @@ export const useSockets = ({ socket, stateData }: SocketHookProps) => {
   const { scheduleAction } = useActionWithinTime()
   const { getFromLocalStorage } = useLocalStorage()
   const { setTheWinner, setPointsEarned } = useContext(ModalContext)
-  const user = getFromLocalStorage<UserData>('userData')!
 
   const handleWinner = (
     winner: string,
@@ -43,6 +42,7 @@ export const useSockets = ({ socket, stateData }: SocketHookProps) => {
 
   const putPlayerInQueue = () => {
     const { gameState } = stateData
+    const user = getFromLocalStorage<UserData>('userData')!
 
     socket!.emit('put-player-in-queue', {
       ...gameState,
@@ -53,6 +53,8 @@ export const useSockets = ({ socket, stateData }: SocketHookProps) => {
 
   const removePlayerFromQueue = () => {
     const { gameState } = stateData
+    const user = getFromLocalStorage<UserData>('userData')!
+
     socket!.emit('remove-player-from-queue', {
       ...gameState,
       elo: user.elo,

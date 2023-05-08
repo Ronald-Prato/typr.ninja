@@ -1,6 +1,7 @@
 'use client'
 
-import { useContext, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useContext, useEffect, useState } from 'react'
 
 import { Modal } from '@/components'
 import styles from './Match.module.css'
@@ -15,19 +16,30 @@ export default function MatchPage({
 }: {
   params: { id: string; userData: UserData }
 }) {
+  const router = useRouter()
   const { getFromLocalStorage } = useLocalStorage()
   const { gameData, gameOver } = useContext(SocketContext)
-  const uid = getFromLocalStorage<UserData>('userData')!.uid
-
+  const uid = getFromLocalStorage<UserData>('userData')?.uid
+  const [showGame, setShowGame] = useState(false)
   const [currentStage, setCurrentStage] = useState<'single' | 'composed'>(
     'single'
   )
 
+  useEffect(() => {
+    if (!gameData.chars.length) {
+      router.replace('/queue')
+      return
+    }
+
+    console.log(gameData)
+    setShowGame(true)
+  }, [gameData])
+
   const handleGameOver = () => {
-    gameOver(uid, params.id)
+    gameOver(uid!, params.id)
   }
 
-  return (
+  return showGame ? (
     <div className={styles.mainContainer}>
       {currentStage === 'single' && (
         <SingleWordStage
@@ -43,5 +55,5 @@ export default function MatchPage({
 
       <Modal />
     </div>
-  )
+  ) : null
 }

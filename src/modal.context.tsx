@@ -19,7 +19,9 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
 
   const showModal = () => setShow(true)
   const hideModal = () => setShow(false)
+
   const setTheWinner = (winnerId: string) => {
+    console.log('Setting winner', winnerId)
     if (!winnerId) return
 
     setWinner(winnerId)

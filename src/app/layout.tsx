@@ -17,16 +17,16 @@ export default function RootLayout({
   return (
     <ThemeProvider theme={defaultTheme}>
       <StoreProvider store={store}>
-        <SocketProvider>
-          <ModalProvider>
+        <ModalProvider>
+          <SocketProvider>
             <html lang="en">
               {/* <div className="phoneBlocker">
             <p>You need a keyboard to play this game</p>
           </div> */}
               <body>{children}</body>
             </html>
-          </ModalProvider>
-        </SocketProvider>
+          </SocketProvider>
+        </ModalProvider>
       </StoreProvider>
     </ThemeProvider>
   )
