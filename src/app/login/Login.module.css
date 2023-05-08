@@ -6,3 +6,12 @@
   align-items: center;
   background-color: var(--dark);
 }
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoImage {
+  margin-bottom: 40px;
+}
