@@ -1,13 +1,23 @@
-'use client'
+import Providers from './Providers'
 
-import './globals.css'
-import { Provider as StoreProvider } from 'react-redux'
-
-import { store } from '@/store'
-import { ThemeProvider } from 'styled-components'
-import { defaultTheme } from '@/theme'
-import { SocketProvider } from '@/sockets.context'
-import { ModalProvider } from '@/modal.context'
+export const metadata = {
+  title: 'Typr Ninja',
+  description: 'The better typing massive competition.',
+  keywords: 'typr, ninja, racing, game, typing, speed, fast, fun, multiplayer',
+  robots: {
+    index: true,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+}
 
 export default function RootLayout({
   children,
@@ -15,19 +25,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <StoreProvider store={store}>
-        <ModalProvider>
-          <SocketProvider>
-            <html lang="en">
-              {/* <div className="phoneBlocker">
-            <p>You need a keyboard to play this game</p>
-          </div> */}
-              <body>{children}</body>
-            </html>
-          </SocketProvider>
-        </ModalProvider>
-      </StoreProvider>
-    </ThemeProvider>
+    <Providers>
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    </Providers>
   )
 }

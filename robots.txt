@@ -1,0 +1,10 @@
+# Block all crawlers for /accounts
+User-agent: *
+Disallow: /queue
+Disallow: /match/*
+Disallow: /create-user
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+Allow: /login

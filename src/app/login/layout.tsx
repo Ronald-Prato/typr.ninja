@@ -1,5 +1,24 @@
 import styles from './Login.module.css'
 
+export const metadata = {
+  title: 'Login | Typr Ninja',
+  description: 'Join the best typing competition community.',
+  keywords: 'typr, ninja, racing, game, typing, speed, fast, fun, multiplayer',
+  robots: {
+    index: true,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+}
+
 export default function LoginLayout({
   children,
 }: {
