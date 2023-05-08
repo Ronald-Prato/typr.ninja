@@ -1,0 +1,82 @@
+.scoreTitle {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 1px;
+  margin: 30px 0;
+  justify-content: center;
+}
+
+.pointsEarned {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bolder;
+  margin-bottom: 2rem;
+  color: var(--gray)
+}
+
+.scoreBtns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.score {
+  text-align: center;
+}
+
+.container {
+  max-width: 450px;
+  width: 100%;
+  margin-inline: auto;
+  padding: 2rem 1rem;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+}
+
+.modal.closed {
+  display: none;
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(-100vw);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+.slideRight {
+  transform: translateX(-100vw);
+  animation: slideRight 250ms 100ms ease-in-out forwards;
+}
+
+.modalContent {
+  width: 100%;
+  background-color: var(--darkLight);
+}
+
+.textDanger {
+  color: var(--danger);
+}
+
+.textSecondary {
+  color: var(--secondary);
+}

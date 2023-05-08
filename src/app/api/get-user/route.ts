@@ -5,7 +5,12 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const uid = searchParams.get('uid')
 
-  const user = await fetch(`${SERVER_API_URL}/user/${uid}`)
+  const user = await fetch(`${SERVER_API_URL}/user/${uid}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  })
   const data = await user.json()
 
   return NextResponse.json({ data })

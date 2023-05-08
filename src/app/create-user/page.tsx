@@ -10,6 +10,7 @@ import { useSessionValidation } from '../../hooks/useSessionValidation'
 import { useRouter } from 'next/navigation'
 import { RootState, useAppSelector } from '@/store'
 import { Button, Spinner } from '@/components'
+import { CLIENT_API_URL } from '@/constants'
 
 function SelectUser() {
   const router = useRouter()
@@ -38,7 +39,7 @@ function SelectUser() {
 
   const handleStart = async () => {
     setIsUpdatingUser(true)
-    const updated = await fetch('api/update-user', {
+    const updated = await fetch(`${CLIENT_API_URL}/api/update-user`, {
       method: 'PUT',
       body: JSON.stringify({
         uid: user.uid,

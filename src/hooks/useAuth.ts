@@ -12,6 +12,7 @@ import { useAppDispatch } from '@/store'
 import { useLocalStorage } from './useLocalStorage'
 import { setUserData } from '@/store/user/user.dispatchers'
 import { cookies } from 'next/headers'
+import { CLIENT_API_URL } from '@/constants'
 // import { fetchUserCreation } from '../services/signup'
 
 export const useAuth = () => {
@@ -42,19 +43,23 @@ export const useAuth = () => {
       )
 
       if (additionalInfo?.isNewUser) {
-        const response = await fetch('/api/create-user', {
-          method: 'POST',
-          body: JSON.stringify({
-            nickname: '',
-            uid: user.uid,
-            email: user.email,
-          }),
-        })
+        try {
+          await fetch(`${CLIENT_API_URL}/api/create-user`, {
+            method: 'POST',
+            body: JSON.stringify({
+              nickname: '',
+              uid: user.uid,
+              email: user.email,
+            }),
+          })
 
-        if (response) {
           setIsLoading(false)
-          router.replace('/queue')
+          router.replace('/create-user')
+        } catch (err) {
+          console.log(err)
         }
+
+        return
       }
 
       router.replace('/queue')

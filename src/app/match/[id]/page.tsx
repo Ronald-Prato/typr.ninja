@@ -2,6 +2,7 @@
 
 import { useContext, useState } from 'react'
 
+import { Modal } from '@/components'
 import styles from './Match.module.css'
 import { UserData } from '@/types/user'
 import SocketContext from '@/sockets.context'
@@ -39,6 +40,8 @@ export default function MatchPage({
       {currentStage === 'composed' && (
         <ComposedStage onFinish={handleGameOver} sentence={gameData.sentence} />
       )}
+
+      <Modal />
     </div>
   )
 }

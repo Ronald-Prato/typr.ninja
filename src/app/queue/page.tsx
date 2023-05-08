@@ -5,10 +5,11 @@ import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import styles from './Queue.module.css'
+
 import { Button } from '@/components'
+import { useAuth } from '@/hooks/useAuth'
 import SocketContext from '@/sockets.context'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
-import { useAuth } from '@/hooks/useAuth'
 
 export default function QueuePage(props: { params: { userData: UserData } }) {
   const { logout } = useAuth()

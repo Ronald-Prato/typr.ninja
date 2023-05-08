@@ -1,15 +1,15 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Socket } from 'socket.io-client'
 import { useRouter } from 'next/navigation'
 
-import { RootState, useAppDispatch, useAppSelector } from '@/store'
 import { CompleteGameDataProps } from '@/types/game'
 import { setIdSocket, gameHasStartedSocket, gameOverSocket } from '@/sockets'
 import { useLocalStorage } from './useLocalStorage'
 import { UserData } from '@/types/user'
 import { useActionWithinTime } from './useActionWithinTime'
+import ModalContext from '@/modal.context'
 
 interface SocketHookProps {
   socket: Socket | null
@@ -18,19 +18,17 @@ interface SocketHookProps {
 
 export const useSockets = ({ socket, stateData }: SocketHookProps) => {
   const router = useRouter()
-  const { getFromLocalStorage } = useLocalStorage()
   const { scheduleAction } = useActionWithinTime()
+  const { getFromLocalStorage } = useLocalStorage()
+  const { setTheWinner, setPointsEarned } = useContext(ModalContext)
   const user = getFromLocalStorage<UserData>('userData')!
 
   const handleWinner = (
     winner: string,
     pointsEarned: Record<string, string>
   ) => {
-    winner === user.uid
-      ? alert(`You won! ${pointsEarned[user.uid]}`)
-      : alert(`You lost! ${pointsEarned[user.uid]}`)
-
-    router.replace('/queue')
+    setTheWinner(winner)
+    setPointsEarned(pointsEarned)
   }
 
   useEffect(() => {
