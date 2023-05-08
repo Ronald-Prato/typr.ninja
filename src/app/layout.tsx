@@ -5,11 +5,11 @@ export const metadata = {
   description: 'The better typing massive competition.',
   keywords: 'typr, ninja, racing, game, typing, speed, fast, fun, multiplayer',
   robots: {
-    index: true,
+    index: false,
     follow: false,
     nocache: true,
     googleBot: {
-      index: true,
+      index: false,
       follow: false,
       noimageindex: true,
       'max-video-preview': -1,
