@@ -4,16 +4,23 @@ import ModalContext from '@/modal.context'
 import { RootState, useAppSelector } from '@/store'
 import { Button } from '../Button'
 import styles from './Modal.module.css'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { UserData } from '@/types/user'
 
 const Win = () => {
   const router = useRouter()
-  const user = useAppSelector((state: RootState) => state.user)
-  const { winner, pointsEarned } = useContext(ModalContext)
+  const { getFromLocalStorage } = useLocalStorage()
+  const user = getFromLocalStorage<UserData>('userData')!
+  const { winner, pointsEarned, hideModal, setTheWinner, setPointsEarned } =
+    useContext(ModalContext)
 
   const didIWin = () => winner === user.uid
 
   const handlePlayAgain = () => {
     router.replace('/queue')
+    hideModal()
+    setTheWinner('')
+    setPointsEarned({})
   }
 
   return (
