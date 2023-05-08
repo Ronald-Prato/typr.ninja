@@ -40,6 +40,7 @@
 
 .modal {
   position: fixed;
+  font-family: 'Righteous', cursive;
   top: 0;
   left: 0;
   width: 100vw;

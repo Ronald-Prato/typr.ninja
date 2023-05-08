@@ -13,7 +13,7 @@ type ModalProps = {
 const ModalContext = createContext<ModalProps>({} as ModalProps)
 
 export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(false)
   const [winner, setWinner] = useState('')
   const [pointsEarned, setPointsEarned] = useState<Record<string, string>>({})
 
