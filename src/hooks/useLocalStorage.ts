@@ -1,9 +1,7 @@
 export function useLocalStorage() {
   function saveInLocalStorage<T>(key: string, value: T) {
-    console.log('SETTING UP LOCAL STORAGE', key, value)
     if (typeof window === 'undefined') return null
     localStorage.setItem(key, JSON.stringify(value))
-    console.log('SAVED IN LOCAL STORAGE')
   }
 
   function getFromLocalStorage<T>(key: string): T | null {
