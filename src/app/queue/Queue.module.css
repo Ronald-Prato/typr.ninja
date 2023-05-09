@@ -37,13 +37,10 @@
   border-radius: 10px;
   position: relative;
   box-shadow: 0 8px 0 rgba(0, 0, 0, 0.2);
-  
 }
 
 .levelBarCompleted {
-  background-image: linear-gradient(to right,
-      var(--secondary),
-      var(--primary));
+  background-image: linear-gradient(to right, var(--secondary), var(--primary));
   height: 40px;
   display: flex;
   align-items: center;
@@ -89,4 +86,10 @@
   position: fixed;
   bottom: 5%;
   transform: scale(0.8);
+}
+
+.logoImage {
+  position: fixed;
+  left: 5%;
+  top: 5%;
 }
