@@ -1,17 +1,17 @@
 'use client'
 
+import Image from 'next/image'
 import { UserData } from '@/types/user'
 import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import Loading from './loading'
-import styles from './Queue.module.css'
+import styles from './QueuePage.module.css'
 
-import { Button } from '@/components'
+import { Button, OnlinePlayersIndicator } from '@/components'
 import { useAuth } from '@/hooks/useAuth'
 import SocketContext from '@/sockets.context'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
-import Image from 'next/image'
 
 export default function QueuePage(props: { params: { userData: UserData } }) {
   const { logout } = useAuth()
@@ -46,6 +46,10 @@ export default function QueuePage(props: { params: { userData: UserData } }) {
 
   return showComponent ? (
     <div className={styles.queueMainContainer}>
+      <div className={styles.playersAmount}>
+      <OnlinePlayersIndicator />
+      </div>
+
       <Image
         placeholder="blur"
         width={100}

@@ -90,3 +90,12 @@
   bottom: 5%;
   transform: scale(0.8);
 }
+
+.playersAmount {
+  position: absolute;
+  width: fit-content;
+  right: 0;
+  left: 0;
+  top: 5%;
+  margin: auto;
+}

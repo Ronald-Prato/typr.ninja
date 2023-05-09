@@ -1,5 +1,5 @@
 import { Spinner } from '@/components'
-import styles from './Queue.module.css'
+import styles from './QueuePage.module.css'
 
 export default function Loading() {
   return (

@@ -12,9 +12,11 @@ export type SocketStateProps = {
 }
 
 export interface CompleteGameDataProps {
+  playersAmount: number
   gameData: GameDataProps
   gameState: SocketStateProps
   setRoomId: (socketId: string) => void
   setSocketId: (roomId: string) => void
   setNewGameData: (newGameData: GameDataProps) => void
+  setThePlayersAmount: (playersAmount: number) => void
 }

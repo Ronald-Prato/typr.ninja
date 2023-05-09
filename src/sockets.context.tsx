@@ -8,8 +8,10 @@ import {
 } from './types/game'
 
 type QueueProps = {
+  playersAmount: number
   putPlayerInQueue: () => void
   removePlayerFromQueue: () => void
+  setThePlayersAmount: (amount: number) => void
   gameOver: (uid: string, roomId: string) => void
 }
 
@@ -34,6 +36,12 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     startIntervalFloor: -1,
   })
 
+  const [playersAmount, setPlayersAmount] = useState(0)
+
+  
+  const setThePlayersAmount = (amount: number) => setPlayersAmount(amount)
+
+
   const setSocketId = (socketId: string) => {
     setState((prev) => ({ ...prev, socketId }))
   }
@@ -50,9 +58,11 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const completeGameData: CompleteGameDataProps = {
     gameState: state,
     gameData,
+    playersAmount,
     setRoomId,
     setSocketId,
     setNewGameData,
+    setThePlayersAmount,
   }
 
   const { emitters } = useSockets({ socket, stateData: completeGameData })
