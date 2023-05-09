@@ -6,12 +6,13 @@ import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import Loading from './loading'
+import Logo from '../../assets/logo.png'
 import styles from './QueuePage.module.css'
 
-import { Button, OnlinePlayersIndicator } from '@/components'
 import { useAuth } from '@/hooks/useAuth'
 import SocketContext from '@/sockets.context'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { Button, OnlinePlayersIndicator } from '@/components'
 
 export default function QueuePage(props: { params: { userData: UserData } }) {
   const { logout } = useAuth()
@@ -50,6 +51,12 @@ export default function QueuePage(props: { params: { userData: UserData } }) {
       <OnlinePlayersIndicator />
       </div>
 
+      <Image
+        className={styles.logoImage}
+        src={Logo}
+        width={200}
+        alt="Typr Ninja Logo"
+      />
       <Image
         placeholder="blur"
         width={100}
