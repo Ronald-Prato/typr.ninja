@@ -7,6 +7,8 @@ import { useContext, useEffect, useState } from 'react'
 import Loading from './loading'
 import styles from './Queue.module.css'
 
+import Logo from '../../assets/logo.png'
+
 import { Button } from '@/components'
 import { useAuth } from '@/hooks/useAuth'
 import SocketContext from '@/sockets.context'
@@ -46,6 +48,12 @@ export default function QueuePage(props: { params: { userData: UserData } }) {
 
   return showComponent ? (
     <div className={styles.queueMainContainer}>
+      <Image
+        className={styles.logoImage}
+        src={Logo}
+        width={200}
+        alt="Typr Ninja Logo"
+      />
       <Image
         placeholder="blur"
         width={100}

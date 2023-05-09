@@ -15,7 +15,7 @@ export default function LoginPage() {
       <Image
         className={styles.logoImage}
         src={Logo}
-        width={500}
+        width={200}
         alt="Typr Ninja Logo"
       />
       <Button type="primary" onClick={handleGoogleSignup}>
