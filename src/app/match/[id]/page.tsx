@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
-import { Modal } from '@/components'
+import { Modal, OpponentCard } from '@/components'
 import styles from './Match.module.css'
 import { UserData } from '@/types/user'
 import SocketContext from '@/sockets.context'
@@ -17,13 +17,15 @@ export default function MatchPage({
   params: { id: string; userData: UserData }
 }) {
   const router = useRouter()
-  const { getFromLocalStorage } = useLocalStorage()
-  const { gameData, gameOver } = useContext(SocketContext)
-  const uid = getFromLocalStorage<UserData>('userData')?.uid
   const [showGame, setShowGame] = useState(false)
+  const { getFromLocalStorage } = useLocalStorage()
+  const uid = getFromLocalStorage<UserData>('userData')?.uid
+  const { gameData, gameOver, playersInfo } = useContext(SocketContext)
   const [currentStage, setCurrentStage] = useState<'single' | 'composed'>(
     'single'
   )
+
+  const opponent = playersInfo.find((player) => player.uid !== uid)
 
   useEffect(() => {
     if (!gameData.chars.length) {
@@ -41,6 +43,10 @@ export default function MatchPage({
 
   return showGame ? (
     <div className={styles.mainContainer}>
+      <div className={styles.opponentCardContainer}>
+      <OpponentCard opponent={opponent} />
+      </div>
+
       {currentStage === 'single' && (
         <SingleWordStage
           onFinish={() => setCurrentStage('composed')}

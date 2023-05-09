@@ -17,10 +17,9 @@ const Win = () => {
   const didIWin = () => winner === user.uid
 
   const handlePlayAgain = () => {
-    router.replace('/queue')
-    hideModal()
     setTheWinner('')
     setPointsEarned({})
+    router.replace('/queue')
   }
 
   return (

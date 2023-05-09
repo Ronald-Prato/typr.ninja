@@ -37,7 +37,7 @@ export const useSockets = ({ socket, stateData }: SocketHookProps) => {
     setIdSocket(socket, stateData)
     gameOverSocket(socket, handleWinner)
     gameHasStartedSocket(socket, stateData, (roomId, intervals) =>
-    scheduleAction(() => router.push(`/match/${roomId}`), intervals)
+      scheduleAction(() => router.push(`/match/${roomId}`), intervals)
     )
     countPlayersSocket(socket, (count: number) => {
       stateData.setThePlayersAmount(count)
@@ -52,6 +52,8 @@ export const useSockets = ({ socket, stateData }: SocketHookProps) => {
       ...gameState,
       elo: user.elo,
       uid: user.uid,
+      nickname: user.nickname,
+      profilePic: user.profilePic,
     })
   }
 

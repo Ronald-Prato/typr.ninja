@@ -11,3 +11,12 @@
   height: 100vh;
   background-color: var(--dark);
 }
+
+.opponentCardContainer {
+  position: fixed;
+  width: fit-content;
+  top: 5%;
+  left: 0;
+  right: 0;
+  margin: auto;
+}

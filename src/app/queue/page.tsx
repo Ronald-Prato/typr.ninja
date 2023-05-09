@@ -10,20 +10,26 @@ import Logo from '../../assets/logo.png'
 import styles from './QueuePage.module.css'
 
 import { useAuth } from '@/hooks/useAuth'
+import ModalContext from '@/modal.context'
 import SocketContext from '@/sockets.context'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { Button, OnlinePlayersIndicator } from '@/components'
 
 export default function QueuePage(props: { params: { userData: UserData } }) {
   const { logout } = useAuth()
-  const { putPlayerInQueue, removePlayerFromQueue } = useContext(SocketContext)
+  const {hideModal} = useContext(ModalContext)
   const [inQueue, setInQueue] = useState(false)
   const { saveInLocalStorage } = useLocalStorage()
+  const { putPlayerInQueue, removePlayerFromQueue } = useContext(SocketContext)
 
   const [showComponent, setShowComponent] = useState(false)
   const router = useRouter()
 
   const user = props.params.userData
+
+  useEffect(() => {
+    hideModal()
+  }, [])
 
   useEffect(() => {
     if (!user) {

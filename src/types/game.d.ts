@@ -1,3 +1,5 @@
+import { UserData } from "./user"
+
 export type GameDataProps = {
   chars: string[]
   sentence: string
@@ -14,9 +16,11 @@ export type SocketStateProps = {
 export interface CompleteGameDataProps {
   playersAmount: number
   gameData: GameDataProps
+  playersInfo: UserDatap[]
   gameState: SocketStateProps
   setRoomId: (socketId: string) => void
   setSocketId: (roomId: string) => void
   setNewGameData: (newGameData: GameDataProps) => void
   setThePlayersAmount: (playersAmount: number) => void
+  setThePlayersInfo: (playersInfo: UserData[]) => void
 }

@@ -6,12 +6,12 @@ import {
   GameDataProps,
   SocketStateProps,
 } from './types/game'
+import { UserData } from './types/user'
 
 type QueueProps = {
-  playersAmount: number
+  
   putPlayerInQueue: () => void
   removePlayerFromQueue: () => void
-  setThePlayersAmount: (amount: number) => void
   gameOver: (uid: string, roomId: string) => void
 }
 
@@ -37,7 +37,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   })
 
   const [playersAmount, setPlayersAmount] = useState(0)
-
+  const [playersInfo, setPlayersInfo] = useState<UserData[]>([])
   
   const setThePlayersAmount = (amount: number) => setPlayersAmount(amount)
 
@@ -47,7 +47,6 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const setNewGameData = (newGameData: GameDataProps) => {
-    console.log('SETTING GAME DATA ', newGameData)
     setGameData(newGameData)
   }
 
@@ -55,19 +54,22 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     setState((prev) => ({ ...prev, roomId: newRoomId }))
   }
 
+  const setThePlayersInfo = (newPlayersInfo: UserData[]) => setPlayersInfo(newPlayersInfo)
+
   const completeGameData: CompleteGameDataProps = {
     gameState: state,
     gameData,
+    playersInfo,
     playersAmount,
     setRoomId,
     setSocketId,
     setNewGameData,
+    setThePlayersInfo,
     setThePlayersAmount,
   }
 
   const { emitters } = useSockets({ socket, stateData: completeGameData })
   const { putPlayerInQueue, removePlayerFromQueue, gameOver } = emitters
-
   
 
   return (
