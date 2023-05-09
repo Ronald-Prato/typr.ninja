@@ -13,9 +13,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider theme={defaultTheme}>
       <StoreProvider store={store}>
-        <SocketProvider>
-          <ModalProvider>{children}</ModalProvider>
-        </SocketProvider>
+        <ModalProvider>
+          <SocketProvider>{children}</SocketProvider>
+        </ModalProvider>
       </StoreProvider>
     </ThemeProvider>
   )

@@ -68,6 +68,8 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const { emitters } = useSockets({ socket, stateData: completeGameData })
   const { putPlayerInQueue, removePlayerFromQueue, gameOver } = emitters
 
+  
+
   return (
     <SocketContext.Provider
       value={{

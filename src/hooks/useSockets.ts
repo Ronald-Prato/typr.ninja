@@ -21,7 +21,7 @@ export const useSockets = ({ socket, stateData }: SocketHookProps) => {
   const router = useRouter()
   const { scheduleAction } = useActionWithinTime()
   const { getFromLocalStorage } = useLocalStorage()
-  const { setTheWinner, setPointsEarned, } = useContext(ModalContext)
+  const { setTheWinner, setPointsEarned } = useContext(ModalContext)
 
   const handleWinner = (
     winner: string,
