@@ -10,9 +10,9 @@ export const OnlinePlayersIndicator = () => {
   const { playersAmount, ping } = useContext(SocketContext)
 
   const getPingColorIndicator = () => {
-    if (ping <= 10) return 'var(--secondary)'
-    if (ping > 10 && ping <= 20) return 'var(--primary)'
-    if (ping > 20) return 'var(--danger)'
+    if (ping <= 100) return 'var(--secondary)'
+    if (ping > 100 && ping <= 200) return 'var(--primary)'
+    if (ping > 200) return 'var(--danger)'
   }
 
   return (
