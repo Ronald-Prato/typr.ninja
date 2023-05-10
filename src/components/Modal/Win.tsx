@@ -48,7 +48,7 @@ const Win = () => {
       </span>
       <div className={styles.scoreBtns}>
         <Button
-          width={155}
+          width={210}
           loading={isLoading}
           onClick={handlePlayAgain}
           type="primary"

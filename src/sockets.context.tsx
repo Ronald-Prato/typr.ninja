@@ -36,6 +36,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     startIntervalFloor: -1,
   })
 
+  const [ping, setPing] = useState<number>(0)
   const [playersAmount, setPlayersAmount] = useState(0)
   const [playersInfo, setPlayersInfo] = useState<UserData[]>([])
   
@@ -54,15 +55,19 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     setState((prev) => ({ ...prev, roomId: newRoomId }))
   }
 
+  const setPingTime = (newPing: number) => setPing(newPing)
+
   const setThePlayersInfo = (newPlayersInfo: UserData[]) => setPlayersInfo(newPlayersInfo)
 
   const completeGameData: CompleteGameDataProps = {
+    ping,
     gameState: state,
     gameData,
     playersInfo,
     playersAmount,
     setRoomId,
     setSocketId,
+    setPingTime,
     setNewGameData,
     setThePlayersInfo,
     setThePlayersAmount,

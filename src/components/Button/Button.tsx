@@ -28,7 +28,7 @@ export const Button: FC<ButtonProps> = ({
       height={height}
     >
       {loading ? <span className="loader" /> : children}
-      {keyIndicator && (
+      {keyIndicator && !loading && (
         <span className="key-indicator">{keyMap[keyIndicator]}</span>
       )}
     </ButtonMainContainer>

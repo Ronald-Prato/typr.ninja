@@ -1,16 +1,17 @@
 'use client'
 
-import { useContext, useEffect, useState } from 'react'
 import { Socket } from 'socket.io-client'
 import { useRouter } from 'next/navigation'
+import { useContext, useEffect } from 'react'
 
-import { CompleteGameDataProps } from '@/types/game'
-import { setIdSocket, gameHasStartedSocket, gameOverSocket } from '@/sockets'
 import { useLocalStorage } from './useLocalStorage'
-import { UserData } from '@/types/user'
 import { useActionWithinTime } from './useActionWithinTime'
+
+import { UserData } from '@/types/user'
 import ModalContext from '@/modal.context'
+import { CompleteGameDataProps } from '@/types/game'
 import { countPlayersSocket } from '@/sockets/count-players.socket'
+import { setIdSocket, gameOverSocket, gameHasStartedSocket } from '@/sockets'
 
 interface SocketHookProps {
   socket: Socket | null
@@ -42,6 +43,18 @@ export const useSockets = ({ socket, stateData }: SocketHookProps) => {
     countPlayersSocket(socket, (count: number) => {
       stateData.setThePlayersAmount(count)
     })
+
+    const interval = setInterval(() => {
+      const start = Date.now()
+
+      socket.emit('ping', () => {
+        const duration = Date.now() - start
+        console.log(duration)
+        stateData.setPingTime(duration)
+      })
+    }, 3000)
+
+    return () => clearInterval(interval)
   }, [socket, stateData])
 
   const putPlayerInQueue = () => {
