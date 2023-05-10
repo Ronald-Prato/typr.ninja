@@ -6,4 +6,5 @@ export interface ButtonProps {
   loading?: boolean
   width?: number
   height?: number
+  keyIndicator?: 'enter' | 'esc'
 }

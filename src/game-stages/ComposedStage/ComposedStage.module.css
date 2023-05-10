@@ -34,7 +34,7 @@
 .defaultLetter, .correctLetter, .wrongLetter {
   font-family: 'Righteous', cursive;
   font-size: 40px;
-  transition: ease 200ms;
+  transition: ease 100ms;
   letter-spacing: 1px;
 
 }

@@ -35,7 +35,7 @@
   font-family: 'Righteous', cursive;
   letter-spacing: 1px;
   font-size: 40px;
-  transition: ease 200ms;
+  transition: ease 100ms;
   letter-spacing: 5px;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .slideUpAnimation {
-  animation: slideUp 300ms ease;
+  animation: slideUp 200ms ease;
 }
 
 .gameplayMessage {

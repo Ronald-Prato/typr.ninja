@@ -52,6 +52,7 @@ const Win = () => {
           loading={isLoading}
           onClick={handlePlayAgain}
           type="primary"
+          keyIndicator="enter"
         >
           Play again
         </Button>

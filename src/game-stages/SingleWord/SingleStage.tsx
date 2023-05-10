@@ -29,7 +29,7 @@ export const SingleWordStage: FC<SingleWordGameStageProps> = ({
           onFinish()
 
         setGoToNextRound(false)
-      }, 1500)
+      }, 1000)
     }
 
     return () => {

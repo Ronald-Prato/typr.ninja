@@ -82,6 +82,18 @@ export const ButtonMainContainer = styled.button<{
       `transform: translateY(2px); box-shadow: 0 4px 0 ${theme.palette.grayDark}`}
   }
 
+  & .key-indicator {
+    margin-left: 10px;
+    font-size: 0.65rem;
+    font-weight: 500;
+    font-family: 'Chakra Petch', sans-serif;
+    border-radius: 2px;
+    padding: 2px 5px;
+    background-color: var(--dark);
+    font-style: italic;
+    color: var(--white);
+  }
+
   & .loader {
     width: 20px;
     height: 20px;

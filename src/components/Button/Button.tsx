@@ -12,14 +12,25 @@ export const Button: FC<ButtonProps> = ({
   type = 'primary',
   width,
   height,
-}) => (
-  <ButtonMainContainer
-    onClick={() => !loading && onClick()}
-    disabled={disabled}
-    buttonType={type}
-    width={width}
-    height={height}
-  >
-    {loading ? <span className="loader" /> : children}
-  </ButtonMainContainer>
-)
+  keyIndicator,
+}) => {
+  const keyMap = {
+    enter: 'Enter',
+    esc: 'Esc',
+  }
+
+  return (
+    <ButtonMainContainer
+      onClick={() => !loading && onClick()}
+      disabled={disabled}
+      buttonType={type}
+      width={width}
+      height={height}
+    >
+      {loading ? <span className="loader" /> : children}
+      {keyIndicator && (
+        <span className="key-indicator">{keyMap[keyIndicator]}</span>
+      )}
+    </ButtonMainContainer>
+  )
+}

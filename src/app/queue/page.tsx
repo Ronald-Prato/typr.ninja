@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { UserData } from '@/types/user'
 import { useRouter } from 'next/navigation'
+import { doc, onSnapshot } from 'firebase/firestore'
 import { useContext, useEffect, useState } from 'react'
 
 import Loading from './loading'
@@ -10,14 +11,14 @@ import Logo from '../../assets/logo.png'
 import styles from './QueuePage.module.css'
 
 import { useAuth } from '@/hooks/useAuth'
-import ModalContext from '@/modal.context'
 import SocketContext from '@/sockets.context'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { Button, OnlinePlayersIndicator } from '@/components'
+import { useKeyListener } from '@/hooks/useKeyListener'
+import { db } from '@/firebase.init'
 
 export default function QueuePage(props: { params: { userData: UserData } }) {
   const { logout } = useAuth()
-  const { hideModal, setTheWinner, setPointsEarned } = useContext(ModalContext)
   const [inQueue, setInQueue] = useState(false)
   const { saveInLocalStorage } = useLocalStorage()
   const { putPlayerInQueue, removePlayerFromQueue } = useContext(SocketContext)
@@ -25,7 +26,16 @@ export default function QueuePage(props: { params: { userData: UserData } }) {
   const [showComponent, setShowComponent] = useState(false)
   const router = useRouter()
 
-  const user = props.params.userData
+  const [user, setUser] = useState(props.params.userData)
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, 'users', user.uid), (doc) => {
+      const updatedUser: UserData = doc.data() as UserData
+      setUser(updatedUser)
+    })
+
+    return () => unsub()
+  }, [user])
 
   useEffect(() => {
     if (!user) {
@@ -35,10 +45,10 @@ export default function QueuePage(props: { params: { userData: UserData } }) {
 
     setShowComponent(true)
     saveInLocalStorage<UserData>('userData', user)
-  }, [props.params.userData])
+  }, [user])
 
   const getInQueue = () => {
-    putPlayerInQueue()
+    !inQueue && putPlayerInQueue()
     setInQueue(true)
   }
 
@@ -46,6 +56,7 @@ export default function QueuePage(props: { params: { userData: UserData } }) {
     removePlayerFromQueue()
     setInQueue(false)
   }
+  useKeyListener({ Enter: () => getInQueue(), Escape: () => getOffQueue() })
 
   return showComponent ? (
     <div className={styles.queueMainContainer}>
@@ -85,6 +96,7 @@ export default function QueuePage(props: { params: { userData: UserData } }) {
       </section>
 
       <Button
+        keyIndicator={inQueue ? 'esc' : 'enter'}
         type={inQueue ? 'secondary' : 'primary'}
         onClick={() => (inQueue ? getOffQueue() : getInQueue())}
       >
