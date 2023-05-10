@@ -1,15 +1,20 @@
 'use client'
 
 import 'animate.css'
-import { FC, useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { FC, useContext, useEffect, useRef, useState } from 'react'
 
 import styles from './ComposedStage.module.css'
 import { ComposedGameStageProps } from './contracts'
+
+import ModalContext from '@/modal.context'
 
 export const ComposedStage: FC<ComposedGameStageProps> = ({
   sentence,
   onFinish,
 }) => {
+  const router = useRouter()
+  const { winner } = useContext(ModalContext)
   const inputRef = useRef<HTMLInputElement>(null)
   const [currentText, setCurrentText] = useState('')
   const spacesPositions = sentence
@@ -18,6 +23,12 @@ export const ComposedStage: FC<ComposedGameStageProps> = ({
       return !letter.trim().length ? index : 0
     })
     .filter(Boolean)
+
+  useEffect(() => {
+    if (winner) {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [winner])
 
   useEffect(() => {
     inputRef.current?.focus()

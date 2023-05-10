@@ -17,7 +17,7 @@ import { Button, OnlinePlayersIndicator } from '@/components'
 
 export default function QueuePage(props: { params: { userData: UserData } }) {
   const { logout } = useAuth()
-  const {hideModal} = useContext(ModalContext)
+  const { hideModal, setTheWinner, setPointsEarned } = useContext(ModalContext)
   const [inQueue, setInQueue] = useState(false)
   const { saveInLocalStorage } = useLocalStorage()
   const { putPlayerInQueue, removePlayerFromQueue } = useContext(SocketContext)
@@ -28,10 +28,6 @@ export default function QueuePage(props: { params: { userData: UserData } }) {
   const user = props.params.userData
 
   useEffect(() => {
-    hideModal()
-  }, [])
-
-  useEffect(() => {
     if (!user) {
       router.replace('/login')
       return
@@ -39,7 +35,7 @@ export default function QueuePage(props: { params: { userData: UserData } }) {
 
     setShowComponent(true)
     saveInLocalStorage<UserData>('userData', user)
-  }, [user])
+  }, [props.params.userData])
 
   const getInQueue = () => {
     putPlayerInQueue()
@@ -54,7 +50,7 @@ export default function QueuePage(props: { params: { userData: UserData } }) {
   return showComponent ? (
     <div className={styles.queueMainContainer}>
       <div className={styles.playersAmount}>
-      <OnlinePlayersIndicator />
+        <OnlinePlayersIndicator />
       </div>
 
       <Image

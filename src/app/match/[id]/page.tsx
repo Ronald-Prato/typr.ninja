@@ -10,6 +10,7 @@ import SocketContext from '@/sockets.context'
 import { SingleWordStage } from '@/game-stages'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { ComposedStage } from '@/game-stages/ComposedStage'
+import ModalContext from '@/modal.context'
 
 export default function MatchPage({
   params,
@@ -24,8 +25,16 @@ export default function MatchPage({
   const [currentStage, setCurrentStage] = useState<'single' | 'composed'>(
     'single'
   )
+  const { winner, hideModal, setTheWinner, setPointsEarned } =
+    useContext(ModalContext)
 
   const opponent = playersInfo.find((player) => player.uid !== uid)
+
+  useEffect(() => {
+    hideModal()
+    setTheWinner('', true)
+    setPointsEarned({})
+  }, [])
 
   useEffect(() => {
     if (!gameData.chars.length) {
@@ -33,18 +42,18 @@ export default function MatchPage({
       return
     }
 
-    console.log(gameData)
     setShowGame(true)
   }, [gameData])
 
   const handleGameOver = () => {
-    gameOver(uid!, params.id)
+    console.log(winner)
+    if (!winner) gameOver(uid!, params.id)
   }
 
   return showGame ? (
     <div className={styles.mainContainer}>
       <div className={styles.opponentCardContainer}>
-      <OpponentCard opponent={opponent} />
+        <OpponentCard opponent={opponent} />
       </div>
 
       {currentStage === 'single' && (

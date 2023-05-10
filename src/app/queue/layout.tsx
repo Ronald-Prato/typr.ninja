@@ -4,19 +4,16 @@ import { cookies } from 'next/headers'
 
 export default async function QueueLayout(props: {
   children: React.ReactNode
-  params: { userData: UserData }
+  params: { userData: UserData, refetchUser: () => void }
 }) {
   const uid = cookies().get('uid')?.value
-
+ 
   if (uid) {
     const response = await fetch(`${CLIENT_API_URL}/api/get-user?uid=${uid}`, {
       cache: 'no-store',
-      next: {
-        revalidate: 0,
-      },
     })
     const userData = await response.json()
-
+  
     props.params.userData = userData.data
   }
 

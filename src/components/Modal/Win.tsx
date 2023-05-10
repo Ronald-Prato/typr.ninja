@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react'
+import React, { FC, useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import ModalContext from '@/modal.context'
 import { RootState, useAppSelector } from '@/store'
@@ -10,17 +10,29 @@ import { UserData } from '@/types/user'
 const Win = () => {
   const router = useRouter()
   const { getFromLocalStorage } = useLocalStorage()
+  const [isLoading, setIsLoading] = useState(false)
   const user = getFromLocalStorage<UserData>('userData')!
-  const { winner, pointsEarned, hideModal, setTheWinner, setPointsEarned } =
-    useContext(ModalContext)
+  const { winner, pointsEarned } = useContext(ModalContext)
 
   const didIWin = () => winner === user.uid
 
   const handlePlayAgain = () => {
-    setTheWinner('')
-    setPointsEarned({})
     router.replace('/queue')
   }
+
+  const handleKeyPress = (e: KeyboardEvent) => {
+    if (e.key !== 'Enter') return
+    setIsLoading(true)
+    router.replace('/queue')
+  }
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [])
 
   return (
     <div className={styles.score}>
@@ -35,7 +47,12 @@ const Win = () => {
         {pointsEarned[user.uid]} points
       </span>
       <div className={styles.scoreBtns}>
-        <Button onClick={handlePlayAgain} type="primary">
+        <Button
+          width={155}
+          loading={isLoading}
+          onClick={handlePlayAgain}
+          type="primary"
+        >
           Play again
         </Button>
       </div>
